@@ -19,4 +19,3 @@ public:
 
    void setQuantity(int);
 };
-#endif
