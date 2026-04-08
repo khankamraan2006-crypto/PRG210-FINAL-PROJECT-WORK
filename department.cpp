@@ -37,5 +37,16 @@ void Department::listProducts() const
   for(int i=0;i<count;i++)
     {
       cout<<i+1<<"."<<
+        products[i].getName()<<"$"<<
+        product[i].getPrice()
+                  <<"Stock:"<<
+        product[i].getQuantity()<<endl;
     }
+}
+
+Product* Department::getProduct() const {
+  return products;
+}
+int Department::getTotalProducts() const{
+  return count;
 }
