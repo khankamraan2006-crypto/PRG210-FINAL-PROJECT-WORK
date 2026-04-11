@@ -1,4 +1,4 @@
-#include "department.h"
+#include "Department.h"
 #include <iosteam>
 #include <cstring>
 using namespace std;
@@ -6,7 +6,7 @@ using namespace std;
 Department::Department()
 {
   name[0]='\0';
-  product=0;
+  products=0;
   count=0;
 }
 Department::~Department()
@@ -26,7 +26,7 @@ void Department::addProduct(const Product& p)
 {
   Product* temp=new Product[count+1];
   for (int i=0;i<count;i++)
-    temp[i]=product[i];
+    temp[i]=products[i];
   temp[count]=p;
   delete[] products;
   products=temp;
@@ -38,9 +38,9 @@ void Department::listProducts() const
     {
       cout<<i+1<<"."<<
         products[i].getName()<<"$"<<
-        product[i].getPrice()
+        products[i].getPrice()
                   <<"Stock:"<<
-        product[i].getQuantity()<<endl;
+        products[i].getQuantity()<<endl;
     }
 }
 
