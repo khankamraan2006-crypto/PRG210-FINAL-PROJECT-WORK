@@ -4,19 +4,21 @@
 class Product
 {
 private:
-      char name[100];
-      double price;
-      int quanity;
-public:
-      Product();
-      Product(const char*,double,int);
+    char name[100];
+    double price;
+    int quantity;
 
-     void setProduct(const char*,double,int);
+public:
+    Product();
+    Product(const char* itemName, double itemPrice, int itemQuantity);
+
+    void setProduct(const char* itemName, double itemPrice, int itemQuantity);
 
     const char* getName() const;
     double getPrice() const;
     int getQuantity() const;
 
-   void setQuantity(int);
+    void setQuantity(int itemQuantity);
 };
+
 #endif
