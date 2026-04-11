@@ -1,4 +1,4 @@
-#include "product.h"
+#include "Product.h"
 #include <cstring>
 
 Product::(){
