@@ -6,22 +6,25 @@
 class Department
 {
 private:
-    char name[100];
+    char departmentName[100];
     Product* products;
-    int count;
+    int totalProducts;
 
 public:
     Department();
+    Department(const char* name);
+    Department(const Department& other);
+    Department& operator=(const Department& other);
     ~Department();
-    
-    void setDepartmentName(const char*);
+
+    void setDepartmentName(const char* name);
     const char* getDepartmentName() const;
 
-    void addProduct(const Product&);
-    void listProducts() const;
-
-    Product* getProducts() const;
     int getTotalProducts() const;
-};    
+    Product* getProducts() const;
+
+    void addProduct(const Product& newProduct);
+    void listProducts() const;
+};
 
 #endif
