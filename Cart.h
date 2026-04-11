@@ -1,12 +1,12 @@
 #ifndef CART_H
 #define CART_H
 
-#include "product.h"
+#include "Product.h"
 
 class Cart
 {
 private:
-    product*items;
+    Product*items;
     int*qty;
     int count;
 
@@ -14,7 +14,7 @@ public:
    Cart();
    ~Cart();
 
-   void addToCart(const product&,int);
+   void addToCart(const Product&,int);
    void showCart() const;
 };
 
