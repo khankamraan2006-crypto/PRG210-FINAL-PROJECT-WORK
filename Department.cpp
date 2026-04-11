@@ -1,52 +1,130 @@
 #include "Department.h"
-#include <iosteam>
+#include <iostream>
 #include <cstring>
 using namespace std;
 
 Department::Department()
 {
-  name[0]='\0';
-  products=0;
-  count=0;
+    departmentName[0] = '\0';
+    products = 0;
+    totalProducts = 0;
 }
-Department::~Department()
+
+Department::Department(const char* name)
 {
-  delete[] products;
+    products = 0;
+    totalProducts = 0;
+    setDepartmentName(name);
 }
-void Department::setDepartmentName(const char*n)
+
+Department::Department(const Department& other)
 {
-  strncpy(name,n,99);
-  name[99]='\0'
-}
-const char* Department::getDepartmentName() const
-{
-  return name;
-}
-void Department::addProduct(const Product& p)
-{
-  Product* temp=new Product[count+1];
-  for (int i=0;i<count;i++)
-    temp[i]=products[i];
-  temp[count]=p;
-  delete[] products;
-  products=temp;
-  count++;
-}
-void Department::listProducts() const
-{
-  for(int i=0;i<count;i++)
+    strcpy(departmentName, other.departmentName);
+    totalProducts = other.totalProducts;
+
+    if (totalProducts > 0)
     {
-      cout<<i+1<<"."<<
-        products[i].getName()<<"$"<<
-        products[i].getPrice()
-                  <<"Stock:"<<
-        products[i].getQuantity()<<endl;
+        products = new Product[totalProducts];
+        for (int i = 0; i < totalProducts; i++)
+        {
+            products[i] = other.products[i];
+        }
+    }
+    else
+    {
+        products = 0;
     }
 }
 
-Product* Department::getProduct() const {
-  return products;
+Department& Department::operator=(const Department& other)
+{
+    if (this != &other)
+    {
+        delete[] products;
+
+        strcpy(departmentName, other.departmentName);
+        totalProducts = other.totalProducts;
+
+        if (totalProducts > 0)
+        {
+            products = new Product[totalProducts];
+            for (int i = 0; i < totalProducts; i++)
+            {
+                products[i] = other.products[i];
+            }
+        }
+        else
+        {
+            products = 0;
+        }
+    }
+
+    return *this;
 }
-int Department::getTotalProducts() const{
-  return count;
+
+Department::~Department()
+{
+    delete[] products;
+}
+
+void Department::setDepartmentName(const char* name)
+{
+    if (name != 0)
+    {
+        strncpy(departmentName, name, 99);
+        departmentName[99] = '\0';
+    }
+    else
+    {
+        departmentName[0] = '\0';
+    }
+}
+
+const char* Department::getDepartmentName() const
+{
+    return departmentName;
+}
+
+int Department::getTotalProducts() const
+{
+    return totalProducts;
+}
+
+Product* Department::getProducts() const
+{
+    return products;
+}
+
+void Department::addProduct(const Product& newProduct)
+{
+    Product* temp = new Product[totalProducts + 1];
+
+    for (int i = 0; i < totalProducts; i++)
+    {
+        temp[i] = products[i];
+    }
+
+    temp[totalProducts] = newProduct;
+
+    delete[] products;
+    products = temp;
+    totalProducts++;
+}
+
+void Department::listProducts() const
+{
+    if (totalProducts == 0)
+    {
+        cout << "No items in this department." << endl;
+        return;
+    }
+
+    for (int i = 0; i < totalProducts; i++)
+    {
+        cout << i + 1 << ". "
+             << products[i].getName()
+             << " - $" << products[i].getPrice()
+             << " - Stock: " << products[i].getQuantity()
+             << endl;
+    }
 }
