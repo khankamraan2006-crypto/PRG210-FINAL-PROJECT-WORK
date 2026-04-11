@@ -1,7 +1,7 @@
 #ifndef DEPARTMENT_H
 #define DEPARTMENT_H
 
-#include "product.h"
+#include "Product.h"
 
 class Department
 {
@@ -21,7 +21,7 @@ public:
     void listProducts() const;
 
     Product* getProducts() const;
-    int geTotalProducts() const;
+    int getTotalProducts() const;
 };    
 
 #endif
